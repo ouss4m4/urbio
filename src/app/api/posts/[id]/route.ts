@@ -1,15 +1,14 @@
 import { NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
+import { postStore } from "@/lib/store";
 
 export async function GET(
-  request: Request,
+  _request: Request,
   { params }: { params: { id: string } }
 ) {
+  const id = await Promise.resolve(parseInt(params.id));
+
   try {
-    const id = parseInt(params.id);
-    const post = await prisma.post.findUnique({
-      where: { id },
-    });
+    const post = await postStore.getPost(id);
 
     if (!post) {
       return NextResponse.json({ error: "Post not found" }, { status: 404 });
