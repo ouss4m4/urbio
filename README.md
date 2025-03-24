@@ -1,36 +1,136 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Blog Dashboard
+
+A simple blog dashboard built with Next.js, Material-UI, TypeScript, and RTK Query.
+
+## Features
+
+### 1. Next.js Setup
+
+- [x] Next.js App Router
+- [x] Server-side rendering (SSR)
+- [x] Dynamic routing for individual blog post pages
+- [x] TypeScript integration
+
+### 2. Material-UI (MUI)
+
+- [ ] Material-UI components for UI
+- [ ] Responsive layout (desktop & mobile)
+- [ ] Custom theme implementation
+
+### 3. TypeScript
+
+- [x] Type definitions for blog post data
+- [x] Type-safe API calls
+- [x] Type-safe state management
+
+### 4. RTK Query
+
+- [x] API calls management
+- [x] Caching implementation
+- [x] Automatic refetching
+- [x] Loading & error states
+
+### 5. Core Functionality
+
+#### Blog Post List Page
+
+- [x] Display list of blog posts
+- [x] Show title, author, and excerpt
+- [ ] "Read More" navigation
+- [ ] Infinite scrolling
+
+#### Blog Post Detail Page
+
+- [ ] Full post content display
+- [ ] Author information
+- [ ] Navigation back to list
+
+#### Add New Post
+
+- [ ] Form to add new posts
+- [ ] Title, author, content fields
+- [ ] Form validation
+- [ ] Success/error feedback
+
+### 6. Data Management
+
+- [x] In-memory store with JSON
+- [x] CRUD operations
+- [x] Data persistence between sessions
+
+## Project Structure
+
+```
+src/
+├── app/              # Next.js App Router
+│   ├── api/         # API routes
+│   └── [post]/      # Dynamic post pages
+├── components/       # React components
+├── lib/             # Utilities
+├── store/           # Redux store
+├── types/           # TypeScript types
+└── data/            # Initial data
+```
+
+## API Endpoints
+
+1. `GET /api/posts`
+
+   - Fetch posts with pagination
+   - Query params: cursor, limit
+
+2. `GET /api/posts/:id`
+
+   - Fetch single post
+   - URL param: id
+
+3. `POST /api/posts`
+   - Create new post
+   - Body: { title, content, author, excerpt }
 
 ## Getting Started
 
-First, run the development server:
+1. Install dependencies:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+   ```bash
+   npm install
+   ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Run development server:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+   ```bash
+   npm run dev
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. Open [http://localhost:3000](http://localhost:3000)
 
-## Learn More
+## Implementation Details
 
-To learn more about Next.js, take a look at the following resources:
+### State Management
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- RTK Query for API state management
+- Optimistic updates for post creation
+- Cached responses for better performance
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Data Flow
 
-## Deploy on Vercel
+1. Initial posts loaded from JSON
+2. In-memory store handles CRUD operations
+3. RTK Query manages API state and caching
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### UI/UX Considerations
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Loading states for better user feedback
+- Error handling with user-friendly messages
+- Responsive design for all screen sizes
+
+## Development Status
+
+- [x] Project setup
+- [x] API routes implementation
+- [x] Basic post listing
+- [ ] Post detail page
+- [ ] Create post form
+- [ ] Material-UI integration
+- [ ] Infinite scrolling
+- [ ] Final styling and polish

@@ -3,11 +3,10 @@ import { postStore } from "@/lib/store";
 
 export async function GET(
   _request: Request,
-  { params }: { params: { id: string } }
+  context: { params: { id: string } }
 ) {
-  const id = await Promise.resolve(parseInt(params.id));
-
   try {
+    const id = parseInt(await Promise.resolve(context.params.id));
     const post = await postStore.getPost(id);
 
     if (!post) {

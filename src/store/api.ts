@@ -12,7 +12,16 @@ export const api = createApi({
           url: "/posts",
           params: { cursor, limit },
         }),
-        providesTags: ["Posts"],
+        providesTags: (result) =>
+          result
+            ? [
+                ...result.posts.map(({ id }) => ({
+                  type: "Posts" as const,
+                  id,
+                })),
+                { type: "Posts", id: "LIST" },
+              ]
+            : [{ type: "Posts", id: "LIST" }],
       }
     ),
     getPost: builder.query<Post, number>({
@@ -25,7 +34,7 @@ export const api = createApi({
         method: "POST",
         body,
       }),
-      invalidatesTags: ["Posts"],
+      invalidatesTags: [{ type: "Posts", id: "LIST" }],
     }),
   }),
 });
