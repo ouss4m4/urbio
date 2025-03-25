@@ -6,13 +6,12 @@ import {
   Card,
   CardContent,
   Typography,
-  Grid,
   Box,
   CircularProgress,
   Alert,
+  Grid,
 } from "@mui/material";
 import { formatDistanceToNow } from "date-fns";
-import type { Post } from "@/types";
 
 export function PostsList() {
   const { data, isLoading, error } = useGetPostsQuery({ limit: 10 });
@@ -44,7 +43,7 @@ export function PostsList() {
   }
 
   return (
-    <Grid container spacing={3} p={2}>
+    <Grid container spacing={3}>
       {data.posts.map((post) => (
         <Grid item xs={12} sm={6} md={4} key={post.id}>
           <Link href={`/posts/${post.id}`} style={{ textDecoration: "none" }}>

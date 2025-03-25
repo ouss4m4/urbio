@@ -39,4 +39,5 @@ export const api = createApi({
   }),
 });
 
+
 export const { useGetPostsQuery, useGetPostQuery, useCreatePostMutation } = api;
