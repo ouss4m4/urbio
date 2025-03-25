@@ -3,16 +3,9 @@
 import { useState } from "react";
 import { useCreatePostMutation } from "@/store/api";
 import { useForm, Controller } from "react-hook-form";
-import {
-  Box,
-  Button,
-  TextField,
-  Typography,
-  Paper,
-  Alert,
-  Snackbar,
-} from "@mui/material";
+import { Box, Button, TextField, Typography, Paper, Alert, Snackbar } from "@mui/material";
 import type { CreatePostInput } from "@/types";
+import { redirect } from "next/navigation";
 
 export function AddPostForm() {
   const [createPost, { isLoading }] = useCreatePostMutation();
@@ -42,6 +35,7 @@ export function AddPostForm() {
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to create post");
     }
+    redirect("/");
   };
 
   return (
@@ -59,23 +53,8 @@ export function AddPostForm() {
               value: 3,
               message: "Title must be at least 3 characters",
             },
-            maxLength: {
-              value: 100,
-              message: "Title must be less than 100 characters",
-            },
           }}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              margin="normal"
-              required
-              fullWidth
-              label="Title"
-              error={!!errors.title}
-              helperText={errors.title?.message}
-              autoFocus
-            />
-          )}
+          render={({ field }) => <TextField {...field} margin="normal" required fullWidth label="Title" error={!!errors.title} helperText={errors.title?.message} autoFocus />}
         />
         <Controller
           name="author"
@@ -87,17 +66,7 @@ export function AddPostForm() {
               message: "Author name must be at least 2 characters",
             },
           }}
-          render={({ field }) => (
-            <TextField
-              {...field}
-              margin="normal"
-              required
-              fullWidth
-              label="Author"
-              error={!!errors.author}
-              helperText={errors.author?.message}
-            />
-          )}
+          render={({ field }) => <TextField {...field} margin="normal" required fullWidth label="Author" error={!!errors.author} helperText={errors.author?.message} />}
         />
         <Controller
           name="excerpt"
@@ -108,23 +77,9 @@ export function AddPostForm() {
               value: 10,
               message: "Excerpt must be at least 10 characters",
             },
-            maxLength: {
-              value: 200,
-              message: "Excerpt must be less than 200 characters",
-            },
           }}
           render={({ field }) => (
-            <TextField
-              {...field}
-              margin="normal"
-              required
-              fullWidth
-              label="Excerpt"
-              multiline
-              rows={2}
-              error={!!errors.excerpt}
-              helperText={errors.excerpt?.message}
-            />
+            <TextField {...field} margin="normal" required fullWidth label="Excerpt" multiline rows={2} error={!!errors.excerpt} helperText={errors.excerpt?.message} />
           )}
         />
         <Controller
@@ -138,35 +93,15 @@ export function AddPostForm() {
             },
           }}
           render={({ field }) => (
-            <TextField
-              {...field}
-              margin="normal"
-              required
-              fullWidth
-              label="Content"
-              multiline
-              rows={6}
-              error={!!errors.content}
-              helperText={errors.content?.message}
-            />
+            <TextField {...field} margin="normal" required fullWidth label="Content" multiline rows={6} error={!!errors.content} helperText={errors.content?.message} />
           )}
         />
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          sx={{ mt: 3, mb: 2 }}
-          disabled={isLoading}
-        >
+        <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }} disabled={isLoading}>
           {isLoading ? "Creating..." : "Create Post"}
         </Button>
       </Box>
 
-      <Snackbar
-        open={showSuccess}
-        autoHideDuration={6000}
-        onClose={() => setShowSuccess(false)}
-      >
+      <Snackbar open={showSuccess} autoHideDuration={6000} onClose={() => setShowSuccess(false)}>
         <Alert severity="success" onClose={() => setShowSuccess(false)}>
           Post created successfully!
         </Alert>

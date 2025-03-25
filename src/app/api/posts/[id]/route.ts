@@ -2,12 +2,12 @@ import { NextResponse } from "next/server";
 import { postStore } from "@/lib/store";
 
 export async function GET(
-  _request: Request,
-  context: { params: { id: string } }
+  _: Request,
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const id = parseInt(await Promise.resolve(context.params.id));
-    const post = await postStore.getPost(id);
+    const id = (await params).id;
+    const post = await postStore.getPost(parseInt(id));
 
     if (!post) {
       return NextResponse.json({ error: "Post not found" }, { status: 404 });

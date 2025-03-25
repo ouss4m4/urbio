@@ -3,14 +3,12 @@ import Link from "next/link";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { PostDetail } from "@/components/PostDetail";
 
-interface Props {
-  params: {
-    id: string;
-  };
+interface Params {
+  id: string;
 }
 
-export default async function PostPage({ params }: Props) {
-  const postId = parseInt(await Promise.resolve(params.id));
+export default async function PostPage({ params }: { params: Params }) {
+  const { id: postId } = await params;
 
   return (
     <Box component="main" p={4}>
@@ -24,7 +22,7 @@ export default async function PostPage({ params }: Props) {
       >
         Back to Posts
       </Button>
-      <PostDetail id={postId} />
+      <PostDetail id={parseInt(postId)} />
     </Box>
   );
 }
